@@ -1,5 +1,3 @@
-
-
 import './styles.css';
 
 import { Posts } from '../../components/Posts';
@@ -29,7 +27,7 @@ export const Home = () => {
 
     setPosts(postsAndPhotos.slice(page, postsPerPage))
     setAllPosts(postsAndPhotos);
-  }, []);
+  }, [postsPerPage]);
 
   const handleTextChange = (e) => {
     const {value} = e.target;

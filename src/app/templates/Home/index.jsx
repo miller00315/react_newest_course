@@ -7,11 +7,11 @@ import { TextInput } from '../../components/TextInput';
 import { loadPosts } from '../../utils/load-posts';
 import { useEffect, useState, useCallback } from 'react';
 
-export const Home = () => {
+export const Home = (props) => {
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
-  const [postsPerPage] = useState(10);
+  const [postsPerPage] = useState(props.postsPerPage ? props.postsPerPage : 10);
   const [searchValue, setSearchValue] = useState('');
 
   const noMorePosts = page + postsPerPage >= allPosts.length;

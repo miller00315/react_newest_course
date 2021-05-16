@@ -1,3 +1,5 @@
+import P from 'prop-types';
+
 import './styles.css';
 
 import { Posts } from '../../components/Posts';
@@ -7,11 +9,11 @@ import { TextInput } from '../../components/TextInput';
 import { loadPosts } from '../../utils/load-posts';
 import { useEffect, useState, useCallback } from 'react';
 
-export const Home = (props) => {
+export const Home = ({ postQuantity = 2 }) => {
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
-  const [postsPerPage] = useState(props.postPerPage ? props.postPerPage : 10);
+  const [postsPerPage] = useState(postQuantity);
   const [searchValue, setSearchValue] = useState('');
 
   const noMorePosts = page + postsPerPage >= allPosts.length;
@@ -71,4 +73,8 @@ export const Home = (props) => {
       </div>
     </section>
   );
+};
+
+Home.propTypes = {
+  postQuantity: P.number,
 };

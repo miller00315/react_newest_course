@@ -48,7 +48,7 @@ describe('<Home />', () => {
   });
 
   it('Should render search, posts and load more', async () => {
-    render(<Home postPerPage={2} />);
+    render(<Home />);
 
     expect.assertions(3);
 
@@ -68,7 +68,7 @@ describe('<Home />', () => {
   });
 
   it('Should search for posts', async () => {
-    render(<Home postPerPage={2} />);
+    render(<Home />);
 
     const noMorePosts = screen.getByText('Não existem posts');
 
@@ -104,7 +104,7 @@ describe('<Home />', () => {
   });
 
   it('Should load more posts when button "Load more posts" is clicked', async () => {
-    render(<Home postPerPage={2} />);
+    render(<Home />);
 
     const noMorePosts = screen.getByText('Não existem posts');
 

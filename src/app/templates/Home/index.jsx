@@ -11,7 +11,7 @@ export const Home = (props) => {
   const [posts, setPosts] = useState([]);
   const [allPosts, setAllPosts] = useState([]);
   const [page, setPage] = useState(0);
-  const [postsPerPage] = useState(props.postsPerPage ? props.postsPerPage : 10);
+  const [postsPerPage] = useState(props.postPerPage ? props.postPerPage : 10);
   const [searchValue, setSearchValue] = useState('');
 
   const noMorePosts = page + postsPerPage >= allPosts.length;

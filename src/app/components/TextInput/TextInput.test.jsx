@@ -1,44 +1,43 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {TextInput} from '.';
+import { TextInput } from '.';
 
 describe('<TextInput />', () => {
-    it('Should have a value', () => {
-        const fakeFunction = jest.fn();
+  it('Should have a value', () => {
+    const fakeFunction = jest.fn();
 
-        const {debug} = render(<TextInput handleTextChange={fakeFunction} value={'test'} />);
+    const { debug } = render(<TextInput handleTextChange={fakeFunction} value={'test'} />);
 
-        debug();
+    debug();
 
-        const input = screen.getByPlaceholderText(/Type your search/i);
+    const input = screen.getByPlaceholderText(/Type your search/i);
 
-        expect(input).toBeInTheDocument();
+    expect(input).toBeInTheDocument();
 
-        expect(input.value).toBe('test');
-    });
+    expect(input.value).toBe('test');
+  });
 
-    it('Should render a call handleChange function on each key pressed', () => {
-        const fakeFunction = jest.fn();
+  it('Should render a call handleChange function on each key pressed', () => {
+    const fakeFunction = jest.fn();
 
-        render(<TextInput handleTextChange={fakeFunction} />);
-        
-         const input = screen.getByPlaceholderText(/Type your search/i);
+    render(<TextInput handleTextChange={fakeFunction} />);
 
-         const value = 'value';
+    const input = screen.getByPlaceholderText(/Type your search/i);
 
-         userEvent.type(input, value);
+    const value = 'value';
 
-         expect(input.value).toBe(value);
+    userEvent.type(input, value);
 
-         expect(fakeFunction).toHaveBeenCalledTimes(value.length);
-    });
+    expect(input.value).toBe(value);
 
-    it('Should match snapshot', () => {
+    expect(fakeFunction).toHaveBeenCalledTimes(value.length);
+  });
 
-        const fakeFunction = jest.fn();
+  it('Should match snapshot', () => {
+    const fakeFunction = jest.fn();
 
-        const {container} = render(<TextInput handleTextChange={fakeFunction} />);
+    const { container } = render(<TextInput handleTextChange={fakeFunction} />);
 
-        expect(container).toMatchSnapshot();
-    });
+    expect(container).toMatchSnapshot();
+  });
 });

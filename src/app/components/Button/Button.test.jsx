@@ -1,40 +1,46 @@
 import { render, screen } from '@testing-library/react';
-import { Button } from '.'
+import { Button } from '.';
 
 describe('<Button />', () => {
-    it('Should render a button with a text', () => {
-        render(<Button label='test'/>);
+  it('Should render a button with a text', () => {
+    const fakeFunction = jest.fn();
 
-        expect.assertions(1);
+    render(<Button label="test" onClick={fakeFunction} />);
 
-        const button = screen.getByRole('button', {name: /test/i});
+    expect.assertions(1);
 
-        expect(button).toHaveAttribute('class', 'button');
-    });
+    const button = screen.getByRole('button', { name: /test/i });
 
-    it('Should call function on button click', () => {
-        const fakeFunction = jest.fn();
+    expect(button).toHaveAttribute('class', 'button');
+  });
 
-        render(<Button label='test' onClick={fakeFunction}/>);
+  it('Should call function on button click', () => {
+    const fakeFunction = jest.fn();
 
-        screen.getByRole('button', {name: /test/i}).click();
+    render(<Button label="test" onClick={fakeFunction} />);
 
-        expect(fakeFunction).toHaveBeenCalledTimes(1)
-    });
+    screen.getByRole('button', { name: /test/i }).click();
 
-    it('Should be disabled when [disabled] is true', () => {
-        render(<Button label='test' disabled={true}/>);
+    expect(fakeFunction).toHaveBeenCalledTimes(1);
+  });
 
-        const button = screen.getByRole('button', {name: /test/i});
+  it('Should be disabled when [disabled] is true', () => {
+    const fakeFunction = jest.fn();
 
-        expect(button).toBeDisabled();
-    });
+    render(<Button label="test" disabled={true} onClick={fakeFunction} />);
 
-    it('Should be enabled when [disabled] is false', () => {
-        render(<Button label='test' disabled={false}/>);
+    const button = screen.getByRole('button', { name: /test/i });
 
-        const button = screen.getByRole('button', {name: /test/i});
+    expect(button).toBeDisabled();
+  });
 
-        expect(button).toBeEnabled();
-    });
+  it('Should be enabled when [disabled] is false', () => {
+    const fakeFunction = jest.fn();
+
+    render(<Button label="test" disabled={false} onClick={fakeFunction} />);
+
+    const button = screen.getByRole('button', { name: /test/i });
+
+    expect(button).toBeEnabled();
+  });
 });

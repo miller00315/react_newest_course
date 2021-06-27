@@ -1,11 +1,32 @@
-import { createContext, useState } from 'react';
+import P from 'prop-types';
+import { createContext, useReducer } from 'react';
 import { globalState } from './data';
 
 export const GlobalContext = createContext();
+export const Actions = {
+  CHANGE_TITLE: 'change_title',
+};
 
-// eslint-disable-next-line
+//reducers.js
+export const reducer = (state, action) => {
+  switch (action.type) {
+    case action.CHANGE_TITLE:
+      return { ...state, title: action.payload };
+    default:
+      return { ...state };
+  }
+};
+
 export const AppContext = ({ children }) => {
-  const [state, setState] = useState(globalState);
+  const [state, dispatch] = useReducer(reducer, globalState);
 
-  return <GlobalContext.Provider value={{ state, setState }}>{children}</GlobalContext.Provider>;
+  const changeTitle = (payload) => {
+    dispatch({ action: 'updateTitle', payload });
+  };
+
+  return <GlobalContext.Provider value={{ state, changeTitle }}>{children}</GlobalContext.Provider>;
+};
+
+AppContext.propTypes = {
+  children: P.node,
 };

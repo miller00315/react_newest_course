@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import { GlobalContext } from '../../contexts/AppContext';
 
 export const P = () => {
@@ -6,8 +6,15 @@ export const P = () => {
 
   const {
     state: { body },
-    setState,
+    changeTitle,
   } = globalContext;
 
-  return <p onClick={() => setState((s) => ({ ...s, counter: s.counter + 1 }))}>{body}</p>;
+  const inputRef = useRef();
+
+  return (
+    <>
+      <p onClick={() => changeTitle(inputRef.current.value)}>{body}</p>
+      <input type="text" ref={inputRef} />
+    </>
+  );
 };
